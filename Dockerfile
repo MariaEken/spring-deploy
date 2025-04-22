@@ -2,6 +2,8 @@ FROM eclipse-temurin:21-jdk-jammy AS builder
 WORKDIR /opt/app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+# ↓ Här ger vi mvnw exekverings­rättighet ↓
+RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 COPY ./src ./src
 RUN ./mvnw clean install -DskipTests
